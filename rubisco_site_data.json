@@ -1,0 +1,150 @@
+{
+  "app": {
+    "sequence": {
+      "eyebrow": "Plant Rubisco large subunit lookup",
+      "headline": "Create an rbcL sequence for the generalized Rubisco expression platform",
+      "subtitle": "Enter a common or scientific plant name. The app resolves it through UniProt taxonomy, finds the corresponding rbcL protein entry, and returns the amino acid sequence in FASTA format.",
+      "examples": [
+        "Arabidopsis thaliana",
+        "maize",
+        "rice",
+        "sunflower"
+      ],
+      "footer": "Uses UniProt taxonomy search plus the UniProtKB REST API. If a plant name is ambiguous, the app picks the best plant-like taxonomy match and then searches for gene:rbcL within that taxon."
+    },
+    "dryLab": {
+      "eyebrow": "Dry-lab compatibility predictor",
+      "headline": "See how different proteins score in their ability to be folded",
+      "subtitle": "Choose a species to compare its engineered RbcL against the generalized expression platform using the seven-metric dry-lab framework.",
+      "methodology_title": "How this section works",
+      "methodology": "Select a plant from the dropdown to view the overall compatibility score and further information on the seven metrics.",
+      "metric_order": [
+        "stability",
+        "core_fold",
+        "interface",
+        "nterm_similarity",
+        "nterm_surface",
+        "mutation_burden",
+        "codon_adaptation"
+      ],
+      "metric_templates": {
+        "stability": {
+          "title": "Stability Score (ΔΔG)",
+          "short_title": "Stability",
+          "graphic_type": "deltag",
+          "hero_label": "Hero image slot: original vs mutant ΔΔG"
+        },
+        "core_fold": {
+          "title": "Core Structural Preservation",
+          "short_title": "Core fold",
+          "graphic_type": "rmsd",
+          "hero_label": "Hero image slot: aligned wild-type and mutant models"
+        },
+        "interface": {
+          "title": "Holoenzyme Interface Preservation",
+          "short_title": "Interfaces",
+          "graphic_type": "interface",
+          "hero_label": "Hero image slot: mutant holoenzyme model"
+        },
+        "nterm_similarity": {
+          "title": "N-terminal Structural Similarity to a Successful Construct",
+          "short_title": "N-term shape",
+          "graphic_type": "alignment",
+          "hero_label": "Hero image slot: N-termini superimposed"
+        },
+        "nterm_surface": {
+          "title": "N-terminal Surface Area Similarity to a Successful Construct",
+          "short_title": "N-term surface",
+          "graphic_type": "surface",
+          "hero_label": "Hero image slot: N-terminus surface view"
+        },
+        "mutation_burden": {
+          "title": "Conservation-Weighted Mutation Burden",
+          "short_title": "Mutation burden",
+          "graphic_type": "mutation",
+          "hero_label": "Hero image slot: conservation map + BLOSUM62"
+        },
+        "codon_adaptation": {
+          "title": "Codon Adaptation Score",
+          "short_title": "Codon use",
+          "graphic_type": "codon",
+          "hero_label": "Hero image slot: codon adaptation graphic"
+        }
+      }
+    }
+  },
+  "species": {
+    "rice": {
+      "label": "Oryza sativa (rice)",
+      "overall_score": 86.4,
+      "overall_summary": "The modified rice Rubisco is predicted to be highly compatible with the generalized expression platform.",
+      "overall_interpretation": "Highly compatible",
+      "overall_note": "",
+      "metrics": {
+        "stability": {
+          "display_result": "Positive ΔΔG",
+          "what": "ΔΔG describes the predicted change in protein stability caused by the N-terminal substitution. It compares the mutant RbcL with the original plant protein.",
+          "why": "If the mutation makes RbcL much less stable, the protein may be harder to fold correctly or keep stable once it is produced in E. coli.",
+          "how": "Predicted structures for the original and mutant RbcL proteins were evaluated with FoldX to estimate the stability change caused by the substitution.",
+          "interpretation": "The mutant rice RbcL has a positive ΔΔG, which suggests that the engineered protein is not obviously destabilized and may even be slightly more stable than the wild type. That is a good sign for folding in E. coli.",
+          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
+          "hero_image_path": "/images/RiceMetric1.png"
+        },
+        "core_fold": {
+          "display_result": "Pruned RMSD: 0.436 Å",
+          "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. It is a way to see how similar the two proteins are overall.",
+          "why": "If the structure changes a lot, the mutant may behave differently from the wild type. Keeping the catalytic core as unchanged as possible is especially important for Rubisco.",
+          "how": "The mutant and wild-type models were aligned in ChimeraX. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
+          "interpretation": "The unpruned RMSD was 3.706 Å, which is high but expected because the N-terminus has been changed. The pruned RMSD was only 0.436 Å, showing that the main core structure stayed very close to the wild type. That is important because the catalytic machinery sits in this conserved region.",
+          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "hero_image_path": "/images/RiceMetric2.png"
+        },
+        "interface": {
+          "display_result": "Largest decrease: 5.83%",
+          "what": "This metric looks at the protein-protein interface areas between RbcL and RbcS in the original and mutant Rubisco holoenzymes.",
+          "why": "The point of the engineered N-terminus is to make assembly easier, so it is important that the mutation does not badly disrupt the interfaces needed to form the L8S8 holoenzyme.",
+          "how": "Holoenzyme models were built in PyMOL by placing the mutant RbcL into the original holoenzyme and removing the original RbcL. PISA was then used to compare interface areas across the protein-protein contacts.",
+          "interpretation": "The largest decrease in interface area was 5.83% between substructures A and D. That is a small change, so the mutation is unlikely to seriously interfere with holoenzyme assembly.",
+          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
+          "hero_image_path": "/images/RiceMetric3.png"
+        },
+        "nterm_similarity": {
+          "display_result": "RMSD: 0.347 Å",
+          "what": "This metric compares the engineered N-terminus of the rice construct to a successful N-terminal mutant reported in the literature.",
+          "why": "Even with the same amino acid sequence, the N-terminus can fold slightly differently in different plant backbones. If the shape is similar to a known successful construct, the chaperones are more likely to recognize it in the same way.",
+          "how": "The N-terminal residues from the rice mutant and the successful spinach construct were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded.",
+          "interpretation": "The rice and spinach N-termini align very closely, with an RMSD of 0.347 Å. That suggests the rice construct presents a similar recognition surface to the successful spinach example, which is a promising sign for assembly.",
+          "technical_details": "PyMOL alignment of residues 1-76 against the successful spinach construct.",
+          "hero_image_path": "/images/RiceMetric4.png"
+        },
+        "nterm_surface": {
+          "display_result": "<0.5% difference",
+          "what": "This metric checks how similar the N-terminal surface area is between the rice mutant and the successful spinach mutant.",
+          "why": "Surface area gives an extra way to compare the part of the protein that the chaperones will actually see and bind to during assembly.",
+          "how": "The N-terminal regions were isolated in PyMOL and their surface areas were measured and compared.",
+          "interpretation": "The rice mutant differs from the successful spinach mutant by less than 0.5% in surface area. That means the two N-termini expose almost the same amount of surface, so the chaperones should see a very similar target.",
+          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
+          "hero_image_path": "/images/RiceMetric5.png"
+        },
+        "mutation_burden": {
+          "display_result": "503",
+          "what": "This metric estimates how disruptive the N-terminal substitutions are across the sequence overall. It combines how conserved each residue is with how disruptive the actual substitution is.",
+          "why": "Large sequence changes can be risky. This metric helps compare how harsh the N-terminal replacement is from one plant to another and gives a quick sense of how unusual the engineered sequence is.",
+          "how": "A multiple sequence alignment is used to measure conservation at each position, and BLOSUM62 is used to score the substitution itself. The two values are then combined across the 76-residue replacement.",
+          "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
+          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
+          "hero_image_path": "/images/RiceMetric6.png"
+        },
+        "codon_adaptation": {
+          "display_result": "CAI: 0.708",
+          "what": "This metric measures the codon adaptation index, or CAI, for the engineered RbcL gene. It asks how closely the sequence matches the codon usage that E. coli prefers.",
+          "why": "Even a good protein design still has to be expressed efficiently. If the host cell has an easier time reading the gene, it should be more likely to make enough protein for testing.",
+          "how": "The modified RbcL sequence was reverse translated and codon-optimized for E. coli before being passed through a CAI calculator.",
+          "interpretation": "A CAI of 0.708 is fairly high, which suggests that E. coli should be able to produce the engineered RbcL sequence reasonably well.",
+          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
+          "hero_image_path": "/images/RiceMetric7.png"
+        }
+      }
+    }
+  }
+}

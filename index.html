@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create an rbcL sequence for the generalized Rubisco expression platform</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a33;
+      --panel-2: #0f1730;
+      --text: #e8ecff;
+      --muted: #aab4dd;
+      --border: rgba(255,255,255,0.12);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --good: #34d399;
+      --bad: #fb7185;
+      --shadow: 0 16px 50px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(167, 139, 250, 0.14), transparent 28%),
+        linear-gradient(180deg, #08101e 0%, var(--bg) 100%);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    .hero {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      font-size: 0.92rem;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .subtitle {
+      max-width: 78ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 22px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card .head { padding: 18px 18px 0; }
+    .card h2 { margin-bottom: 8px; font-size: 1.2rem; }
+    .card p.note {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .body { padding: 18px; }
+    label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(5,10,25,0.65);
+      color: var(--text);
+      outline: none;
+      font-size: 1rem;
+    }
+    input[type="text"]::placeholder { color: #6c789f; }
+    input[type="text"]:focus, select:focus {
+      border-color: rgba(125, 211, 252, 0.8);
+      box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.12);
+    }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-weight: 700;
+      color: #06111c;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      cursor: pointer;
+      transition: transform 0.14s ease, filter 0.14s ease;
+      min-width: 120px;
+    }
+    button:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    button:disabled { opacity: 0.65; cursor: wait; transform: none; }
+    .status {
+      margin-top: 12px;
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .status.good { color: var(--good); }
+    .status.bad { color: var(--bad); }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .pill {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .pill .k {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .pill .v { word-break: break-word; line-height: 1.45; }
+    textarea {
+      width: 100%;
+      min-height: 420px;
+      resize: vertical;
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(5,10,25,0.75);
+      color: #f4f7ff;
+      font-family: var(--mono);
+      line-height: 1.55;
+      font-size: 0.93rem;
+      outline: none;
+      white-space: pre;
+    }
+    textarea:focus {
+      border-color: rgba(167, 139, 250, 0.8);
+      box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.12);
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .ghost {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+      min-width: auto;
+    }
+    .result-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .result-title h3 { font-size: 1.05rem; }
+    .small { color: var(--muted); font-size: 0.9rem; }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .drylab-shell { margin-top: 18px; }
+    .species-row {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .overall-card, .method-card, .carousel-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      overflow: hidden;
+    }
+    .overall-card .inner, .method-card .inner, .carousel-card .inner { padding: 18px; }
+    .over-title {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+    .overall-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .gauge {
+      width: 160px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--accent) calc(var(--value) * 1%), rgba(255,255,255,0.08) 0);
+      position: relative;
+      margin: 0 auto;
+    }
+    .gauge::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(8,16,30,0.96), rgba(8,16,30,0.82));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .gauge-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      display: grid;
+      gap: 4px;
+    }
+    .gauge-inner .big { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .gauge-inner .unit { color: var(--muted); font-size: 0.86rem; }
+    .overall-copy h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .overall-copy p { color: var(--muted); line-height: 1.6; }
+    .overall-copy .interpretation { margin-top: 12px; font-weight: 700; color: var(--text); }
+    .method-card details { margin-top: 14px; }
+    .method-card summary, .metric-details summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .method-card summary::-webkit-details-marker,
+    .metric-details summary::-webkit-details-marker { display: none; }
+    .method-card .method-copy { color: var(--muted); line-height: 1.6; margin-top: 10px; }
+    .score-legend {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .score-legend .legend-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .legend-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .legend-bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .carousel-nav { display: flex; gap: 8px; }
+    .icon-btn {
+      min-width: auto;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .carousel-window {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,10,25,0.42);
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+    .metric-slide {
+      width: 100%;
+      flex: 0 0 100%;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+    .metric-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+    }
+    .metric-top h3 { font-size: 1.15rem; line-height: 1.2; }
+    .metric-badge {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(125, 211, 252, 0.12);
+      border: 1px solid rgba(125, 211, 252, 0.28);
+      color: var(--text);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .metric-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .metric-panel {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .metric-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.76rem;
+      margin-bottom: 10px;
+    }
+    .hero-slot {
+      min-height: 150px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.03);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .hero-slot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+    .metric-copy {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+      color: var(--text);
+    }
+    .metric-copy h4 {
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .metric-copy p { line-height: 1.58; color: var(--text); }
+    .metric-details {
+      margin-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 12px;
+    }
+    .metric-details .detail-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .detail-item {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .metric-graphic {
+      margin-top: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      overflow: hidden;
+    }
+    .metric-graphic svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(255,255,255,0.22);
+      min-width: auto;
+      padding: 0;
+    }
+    .dot.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .metric-caption {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .section-label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+    @media (max-width: 980px) {
+      .grid, .overview-grid, .metric-layout { grid-template-columns: 1fr; }
+      .species-row { grid-template-columns: 1fr; }
+      .overall-row { grid-template-columns: 1fr; justify-items: start; }
+    }
+    @media (max-width: 640px) {
+      .row { grid-template-columns: 1fr; }
+      textarea { min-height: 320px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .carousel-header { flex-direction: column; align-items: stretch; }
+      .carousel-nav { justify-content: flex-end; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow" id="sequenceEyebrow">Plant Rubisco large subunit lookup</div>
+      <h1 id="sequenceHeadline">Create an rbcL sequence for the generalized Rubisco expression platform</h1>
+      <p class="subtitle" id="sequenceSubtitle"></p>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="head">
+          <h2>Search</h2>
+          <p class="note" id="sequenceExamples"></p>
+        </div>
+        <div class="body">
+          <label for="plantName">Plant name</label>
+          <div class="row">
+            <input id="plantName" type="text" placeholder="Type a common or scientific plant name" autocomplete="off" />
+            <button id="searchBtn">Find sequence</button>
+          </div>
+          <div id="status" class="status">Ready.</div>
+
+          <div class="meta-grid" id="metaGrid" hidden>
+            <div class="pill"><div class="k">Matched taxon</div><div class="v" id="taxonMatch">-</div></div>
+            <div class="pill"><div class="k">UniProt accession</div><div class="v" id="accession">-</div></div>
+            <div class="pill"><div class="k">Protein</div><div class="v" id="proteinName">-</div></div>
+            <div class="pill"><div class="k">Organism</div><div class="v" id="organismName">-</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="head">
+          <div class="result-title">
+            <h3>FASTA output</h3>
+            <span class="small" id="resultHint">No sequence loaded yet.</span>
+          </div>
+          <p class="note">The output is ready to copy or save directly.</p>
+        </div>
+        <div class="body">
+          <textarea id="fastaOutput" spellcheck="false" placeholder=">FASTA will appear here"></textarea>
+          <div class="toolbar">
+            <button class="ghost" id="copyBtn" type="button">Copy FASTA</button>
+            <button class="ghost" id="clearBtn" type="button">Clear</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card drylab-shell" id="drylabSection">
+      <div class="head">
+        <div class="eyebrow" id="drylabEyebrow">Dry-lab compatibility predictor</div>
+        <h2 id="drylabTitle">See how different proteins score in their ability to be folded</h2>
+        <p class="note" id="drylabSubtitle"></p>
+      </div>
+      <div class="body">
+        <div class="species-row">
+          <div>
+            <label for="speciesSelect">Species</label>
+            <select id="speciesSelect"></select>
+          </div>
+          <div class="pill">
+            <div class="k">Current focus</div>
+            <div class="v" id="speciesLabel">-</div>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+          <div class="overall-card">
+            <div class="inner">
+              <div class="over-title">Overall score</div>
+              <div class="overall-row">
+                <div class="gauge" id="overallGauge" style="--value: 0;">
+                  <div class="gauge-inner">
+                    <div class="big" id="overallScore">0.0</div>
+                    <div class="unit">/ 100</div>
+                  </div>
+                </div>
+                <div class="overall-copy">
+                  <h3 id="overallInterpretation">-</h3>
+                  <p id="overallSummary"></p>
+                  <p class="interpretation" id="overallNote"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-card">
+            <div class="inner">
+              <div class="over-title" id="methodTitle">How this section works</div>
+              <p class="method-copy" id="methodCopy"></p>
+              <div>
+                <summary>Score legend</summary>
+                <div class="score-legend" id="scoreLegend"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-card">
+          <div class="inner">
+            <div class="carousel-header">
+              <div>
+                <div class="section-label" id="carouselKicker">Metric 1 of 7</div>
+                <h3 id="metricTitle">Metric title</h3>
+              </div>
+              <div class="carousel-nav">
+                <button class="icon-btn" id="prevMetricBtn" type="button">←</button>
+                <button class="icon-btn" id="nextMetricBtn" type="button">→</button>
+              </div>
+            </div>
+
+            <div class="carousel-window">
+              <div class="carousel-track" id="metricTrack"></div>
+            </div>
+            <div class="carousel-dots" id="metricDots"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer" id="sequenceFooter"></div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
