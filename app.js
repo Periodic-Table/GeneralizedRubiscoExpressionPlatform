@@ -407,7 +407,7 @@ function collectElements() {
 
 async function init() {
   collectElements();
-  state.data = await fetchJson('/api/site-data');
+  state.data = await fetchJson('/rubisco_site_data.json');
   loadMeasureData();
 
   el.speciesSelect.addEventListener('change', (e) => renderSpecies(e.target.value));
