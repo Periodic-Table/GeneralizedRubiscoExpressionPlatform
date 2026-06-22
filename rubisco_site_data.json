@@ -74,6 +74,150 @@
     }
   },
   "species": {
+    "arabidopsis": {
+      "label": "Arabidopsis thaliana",
+      "overall_score": 74.8,
+      "overall_summary": "Arabidopsis thaliana is a well-established model plant. However, the dry lab predicts only a moderate probability of successful Rubisco assembly and activity in the generalized platform.",
+      "overall_interpretation": "Moderate chance of success",
+      "overall_note": "",
+      "metrics": {
+        "stability": {
+          "display_result": "Positive ΔΔG",
+          "what": "ΔΔG describes the predicted change in protein stability caused by the N-terminal substitution. It compares the mutant RbcL with the original plant protein.",
+          "why": "If the mutation makes RbcL much less stable, the protein may be harder to fold correctly or keep stable once it is produced in E. coli.",
+          "how": "Predicted structures for the original and mutant RbcL proteins were evaluated with FoldX to estimate the stability change caused by the substitution.",
+          "interpretation": "Coming soon.",
+          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
+          "hero_image_path": "/images/ArabidopsisMetric1.png"
+        },
+        "core_fold": {
+          "display_result": "Pruned RMSD: 0.756 Å",
+          "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. It is a way to see how similar the two proteins are overall.",
+          "why": "If the structure changes a lot, the mutant may behave differently from the wild type. Keeping the catalytic core as unchanged as possible is especially important for Rubisco.",
+          "how": "The mutant and wild-type models were aligned in ChimeraX. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
+          "interpretation": "The pruned RMSD was quite high at 0.756 Å, showing that the main core structure deviated somewhat from the wild type. This is part of the reason for the lower score, as the catalytic machinery of rbcL may not be as well-preserved following the N-terminal substitution and therefore less representative of the actual catalytic properties of Arabidopsis Rubisco.",
+          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "hero_image_path": "/images/ArabidopsisMetric2.png"
+        },
+        "interface": {
+          "display_result": "Largest decrease: 25.46%",
+          "what": "This metric looks at the protein-protein interface areas between RbcL and RbcS in the original and mutant Rubisco holoenzymes.",
+          "why": "The point of the engineered N-terminus is to make assembly easier, so it is important that the mutation does not badly disrupt the interfaces needed to form the L8S8 holoenzyme.",
+          "how": "Holoenzyme models were built in PyMOL by placing the mutant RbcL into the original holoenzyme and removing the original RbcL. PISA was then used to compare interface areas across the protein-protein contacts.",
+          "interpretation": "The largest decrease in interface area was 25.46%, which is a fairly significant decrease. This indicates it may have difficulty assembling, contributing to its lower score.",
+          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
+          "hero_image_path": "/images/ArabidopsisMetric3.png"
+        },
+        "nterm_similarity": {
+          "display_result": "RMSD: 0.327 Å",
+          "what": "This metric compares the engineered N-terminus of the rice construct to a successful N-terminal mutant reported in the literature.",
+          "why": "Even with the same amino acid sequence, the N-terminus can fold slightly differently in different plant backbones. If the shape is similar to a known successful construct, the chaperones are more likely to recognize it in the same way.",
+          "how": "The N-terminal residues from the rice mutant and the successful spinach construct were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded.",
+          "interpretation": "The N-terminus of the mutant Arabidopsis rbcL most closely aligned with that of the successful Flaveria rbcL. This close alignment indicates that the Arabidopsis N-terminus is also likely to successfully bind to the general chaperone set.",
+          "technical_details": "PyMOL alignment of residues 1-76 against the successful Flaveria construct.",
+          "hero_image_path": "/images/ArabidopsisMetric4.png"
+        },
+        "nterm_surface": {
+          "display_result": "+0.20% difference",
+          "what": "This metric checks how similar the N-terminal surface area is between the rice mutant and the successful spinach mutant.",
+          "why": "Surface area gives an extra way to compare the part of the protein that the chaperones will actually see and bind to during assembly.",
+          "how": "The N-terminal regions were isolated in PyMOL and their surface areas were measured and compared.",
+          "interpretation": "The Arabidopsis N-terminal surface area is essentially identical to that of Flaveria, again indicating that it is likely to bind well to the chaperones.",
+          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
+          "hero_image_path": "/images/ArabidopsisMetric5.png"
+        },
+        "mutation_burden": {
+          "display_result": "546",
+          "what": "This metric estimates how disruptive the N-terminal substitutions are across the sequence overall. It combines how conserved each residue is with how disruptive the actual substitution is.",
+          "why": "Large sequence changes can be risky. This metric helps compare how harsh the N-terminal replacement is from one plant to another and gives a quick sense of how unusual the engineered sequence is.",
+          "how": "A multiple sequence alignment is used to measure conservation at each position, and BLOSUM62 is used to score the substitution itself. The two values are then combined across the 76-residue replacement.",
+          "interpretation": "A mutation burden of 546 is within the acceptable range, as other plant Rubisco proteins were successfully assembled in vitro with similar mutational burdens.",
+          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
+          "hero_image_path": "/images/ArabidopsisMetric6.png"
+        },
+        "codon_adaptation": {
+          "display_result": "CAI: 1.00",
+          "what": "This metric measures the codon adaptation index, or CAI, for the engineered RbcL gene. It asks how closely the sequence matches the codon usage that E. coli prefers.",
+          "why": "Even a good protein design still has to be expressed efficiently. If the host cell has an easier time reading the gene, it should be more likely to make enough protein for testing.",
+          "how": "The modified RbcL sequence was reverse translated and codon-optimized for E. coli before being passed through a CAI calculator.",
+          "interpretation": "This sequence is well-optimized for E. coli with a CAI of 0.89. This is similar to that of other Rubisco proteins which were successfully produced in E. coli.",
+          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
+          "hero_image_path": "/images/ArabidopsisMetric7.png"
+        }
+      }
+    },
+    "flaveria": {
+      "label": "Flaveria bidentis",
+      "overall_score": 100,
+      "overall_summary": "The modified Flaveria has already been shown to assemble successfully with the generalized platform. Its scores are here for comparison.",
+      "overall_interpretation": "Known to be successful",
+      "overall_note": "",
+      "metrics": {
+        "stability": {
+          "display_result": "Positive ΔΔG",
+          "what": "ΔΔG describes the predicted change in protein stability caused by the N-terminal substitution. It compares the mutant RbcL with the original plant protein.",
+          "why": "If the mutation makes RbcL much less stable, the protein may be harder to fold correctly or keep stable once it is produced in E. coli.",
+          "how": "Predicted structures for the original and mutant RbcL proteins were evaluated with FoldX to estimate the stability change caused by the substitution.",
+          "interpretation": "Coming soon.",
+          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
+          "hero_image_path": "/images/FlaveriaMetric1.png"
+        },
+        "core_fold": {
+          "display_result": "Pruned RMSD: 0.475 Å",
+          "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. It is a way to see how similar the two proteins are overall.",
+          "why": "If the structure changes a lot, the mutant may behave differently from the wild type. Keeping the catalytic core as unchanged as possible is especially important for Rubisco.",
+          "how": "The mutant and wild-type models were aligned in ChimeraX. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
+          "interpretation": "The pruned RMSD was only 0.389 Å, showing that the main core structure stayed very close to the wild type. This is important because the catalytic machinery sits in this conserved region.",
+          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "hero_image_path": "/images/FlaveriaMetric2.png"
+        },
+        "interface": {
+          "display_result": "N/A",
+          "what": "This metric looks at the protein-protein interface areas between RbcL and RbcS in the original and mutant Rubisco holoenzymes.",
+          "why": "The point of the engineered N-terminus is to make assembly easier, so it is important that the mutation does not badly disrupt the interfaces needed to form the L8S8 holoenzyme.",
+          "how": "Holoenzyme models were built in PyMOL by placing the mutant RbcL into the original holoenzyme and removing the original RbcL. PISA was then used to compare interface areas across the protein-protein contacts.",
+          "interpretation": "A holoenzyme model for Flaveria bidentis has not been published, so this metric cannot be computed",
+          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
+          "hero_image_path": "/images/FlaveriaMetric3.png"
+        },
+        "nterm_similarity": {
+          "display_result": "RMSD: 0 Å",
+          "what": "This metric compares the engineered N-terminus of the rice construct to a successful N-terminal mutant reported in the literature.",
+          "why": "Even with the same amino acid sequence, the N-terminus can fold slightly differently in different plant backbones. If the shape is similar to a known successful construct, the chaperones are more likely to recognize it in the same way.",
+          "how": "The N-terminal residues from the rice mutant and the successful spinach construct were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded.",
+          "interpretation": "The metric involves comparing to the successful Flaveria N-terminus, but since this is Flaveria, this is not meaningful. A base score of 1 was given.",
+          "technical_details": "PyMOL alignment of residues 1-76 against the successful Flaveria construct.",
+          "hero_image_path": "/images/FlaveriaMetric4.png"
+        },
+        "nterm_surface": {
+          "display_result": "0% difference",
+          "what": "This metric checks how similar the N-terminal surface area is between the rice mutant and the successful spinach mutant.",
+          "why": "Surface area gives an extra way to compare the part of the protein that the chaperones will actually see and bind to during assembly.",
+          "how": "The N-terminal regions were isolated in PyMOL and their surface areas were measured and compared.",
+          "interpretation": "As before, a comparison cannot be made between Flaveria and itself. A base score of 1 was given.",
+          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
+          "hero_image_path": "/images/FlaveriaMetric5.png"
+        },
+        "mutation_burden": {
+          "display_result": "550",
+          "what": "This metric estimates how disruptive the N-terminal substitutions are across the sequence overall. It combines how conserved each residue is with how disruptive the actual substitution is.",
+          "why": "Large sequence changes can be risky. This metric helps compare how harsh the N-terminal replacement is from one plant to another and gives a quick sense of how unusual the engineered sequence is.",
+          "how": "A multiple sequence alignment is used to measure conservation at each position, and BLOSUM62 is used to score the substitution itself. The two values are then combined across the 76-residue replacement.",
+          "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
+          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
+          "hero_image_path": "/images/FlaveriaMetric6.png"
+        },
+        "codon_adaptation": {
+          "display_result": "CAI: 0.9",
+          "what": "This metric measures the codon adaptation index, or CAI, for the engineered RbcL gene. It asks how closely the sequence matches the codon usage that E. coli prefers.",
+          "why": "Even a good protein design still has to be expressed efficiently. If the host cell has an easier time reading the gene, it should be more likely to make enough protein for testing.",
+          "how": "The modified RbcL sequence was reverse translated and codon-optimized for E. coli before being passed through a CAI calculator.",
+          "interpretation": "This sequence was surprisingly well-optimized for E. coli with a CAI of 0.9. This may have been part of the reason it was selected for experimental study.",
+          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
+          "hero_image_path": "/images/FlaveriaMetric7.png"
+        }
+      }
+    },
     "tobacco": {
       "label": "Nicotania tabacum (tobacco)",
       "overall_score": 100,
@@ -114,7 +258,7 @@
           "why": "Even with the same amino acid sequence, the N-terminus can fold slightly differently in different plant backbones. If the shape is similar to a known successful construct, the chaperones are more likely to recognize it in the same way.",
           "how": "The N-terminal residues from the rice mutant and the successful spinach construct were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded.",
           "interpretation": "The metric involves comparing to the successful tobacco N-terminus, but since this is tobacco, this is not meaningful. A base score of 1 was given.",
-          "technical_details": "PyMOL alignment of residues 1-76 against the successful spinach construct.",
+          "technical_details": "PyMOL alignment of residues 1-76 against the successful tobacco construct.",
           "hero_image_path": "/images/TobaccoMetric4.png"
         },
         "nterm_surface": {
