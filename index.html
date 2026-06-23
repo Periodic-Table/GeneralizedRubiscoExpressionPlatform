@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Create an rbcL sequence for the generalized Rubisco expression platform</title>
+  <title>Generalized Rubisco Expression Platform Dry Lab Site</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -479,52 +479,6 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow" id="sequenceEyebrow">Plant Rubisco large subunit lookup</div>
-      <h1 id="sequenceHeadline">Create an rbcL sequence for the generalized Rubisco expression platform</h1>
-      <p class="subtitle" id="sequenceSubtitle"></p>
-    </div>
-
-    <div class="grid">
-      <section class="card">
-        <div class="head">
-          <h2>Search</h2>
-          <p class="note" id="sequenceExamples"></p>
-        </div>
-        <div class="body">
-          <label for="plantName">Plant name</label>
-          <div class="row">
-            <input id="plantName" type="text" placeholder="Type a common or scientific plant name" autocomplete="off" />
-            <button id="searchBtn">Find sequence</button>
-          </div>
-          <div id="status" class="status">Ready.</div>
-
-          <div class="meta-grid" id="metaGrid" hidden>
-            <div class="pill"><div class="k">Matched taxon</div><div class="v" id="taxonMatch">-</div></div>
-            <div class="pill"><div class="k">UniProt accession</div><div class="v" id="accession">-</div></div>
-            <div class="pill"><div class="k">Protein</div><div class="v" id="proteinName">-</div></div>
-            <div class="pill"><div class="k">Organism</div><div class="v" id="organismName">-</div></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="head">
-          <div class="result-title">
-            <h3>FASTA output</h3>
-            <span class="small" id="resultHint">No sequence loaded yet.</span>
-          </div>
-          <p class="note">The output is ready to copy or save directly.</p>
-        </div>
-        <div class="body">
-          <textarea id="fastaOutput" spellcheck="false" placeholder=">FASTA will appear here"></textarea>
-          <div class="toolbar">
-            <button class="ghost" id="copyBtn" type="button">Copy FASTA</button>
-            <button class="ghost" id="clearBtn" type="button">Clear</button>
-          </div>
-        </div>
-      </section>
-    </div>
 
     <section class="card drylab-shell" id="drylabSection">
       <div class="head">
@@ -598,8 +552,53 @@
       </div>
     </section>
 
-    <div class="footer" id="sequenceFooter"></div>
-  </div>
+    
+    <div class="hero">
+        <div class="eyebrow" id="sequenceEyebrow">Plant Rubisco large subunit lookup</div>
+        <h1 id="sequenceHeadline">Create an rbcL sequence for the generalized Rubisco expression platform</h1>
+        <p class="subtitle" id="sequenceSubtitle"></p>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="head">
+          <h2>Search</h2>
+          <p class="note" id="sequenceExamples"></p>
+        </div>
+        <div class="body">
+          <label for="plantName">Plant name</label>
+          <div class="row">
+            <input id="plantName" type="text" placeholder="Type a common or scientific plant name" autocomplete="off" />
+            <button id="searchBtn">Find sequence</button>
+          </div>
+          <div id="status" class="status">Ready.</div>
+
+          <div class="meta-grid" id="metaGrid" hidden>
+            <div class="pill"><div class="k">Matched taxon</div><div class="v" id="taxonMatch">-</div></div>
+            <div class="pill"><div class="k">UniProt accession</div><div class="v" id="accession">-</div></div>
+            <div class="pill"><div class="k">Protein</div><div class="v" id="proteinName">-</div></div>
+            <div class="pill"><div class="k">Organism</div><div class="v" id="organismName">-</div></div>
+          </div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="head">
+          <div class="result-title">
+            <h3>FASTA output</h3>
+            <span class="small" id="resultHint">No sequence loaded yet.</span>
+          </div>
+          <p class="note">The output is ready to copy or save directly.</p>
+        </div>
+        <div class="body">
+          <textarea id="fastaOutput" spellcheck="false" placeholder=">FASTA will appear here"></textarea>
+          <div class="toolbar">
+            <button class="ghost" id="copyBtn" type="button">Copy FASTA</button>
+            <button class="ghost" id="clearBtn" type="button">Clear</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    </div>
 
   <script src="/app.js"></script>
 </body>
