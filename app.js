@@ -150,10 +150,10 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
               <p>${escapeHtml(metric.interpretation)}</p>
             </div>
           </div>
-        </div>
-        <div class="metric-panel">
+          <div class="metric-panel">
             <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
             <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
+          </div>
         </div>
       </div>
     </article>
