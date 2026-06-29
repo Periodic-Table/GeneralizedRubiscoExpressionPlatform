@@ -125,7 +125,6 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
     <article class="metric-slide" data-metric="${escapeHtml(metricKey)}">
       <div class="metric-top">
         <div>
-          <div class="section-label">Metric ${index + 1} of ${total}</div>
           <h3>${escapeHtml(metricTitle(template))}</h3>
         </div>
         <div class="metric-badge">${resultBadge(metric)}</div>
@@ -150,8 +149,8 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
               <p>${escapeHtml(metric.interpretation)}</p>
             </div>
           </div>
-          <div class="metric-panel">
-            <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
+          <div>
+            <div>${renderHeroSlot(metric, template)}</div>
             <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
           </div>
         </div>
