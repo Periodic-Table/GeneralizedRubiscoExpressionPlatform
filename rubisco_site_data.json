@@ -32,19 +32,19 @@
           "title": "Stability Score (ΔΔG)",
           "short_title": "Stability",
           "graphic_type": "deltag",
-          "hero_label": "ΔΔG changes between the wild-type and mutant rbcLs"
           "what": "ΔΔG describes the predicted change in protein stability caused by the N-terminal substitution. It compares the mutant RbcL with the original plant protein.",
           "why": "If the mutation makes RbcL much less stable, the protein may be harder to fold correctly or keep stable once it is produced in E. coli.",
           "how": "Predicted structures for the original and mutant RbcL proteins were evaluated with FoldX to estimate the stability change caused by the substitution.",
+          "hero_label": "ΔΔG changes between the wild-type and mutant rbcLs"
         },
         "core_fold": {
           "title": "Core Structural Preservation",
           "short_title": "Core fold",
           "graphic_type": "rmsd",
-          "hero_label": "Aligned wild-type and mutant models"
           "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. It is a way to see how similar the two proteins are overall.",
           "why": "If the structure changes a lot, the mutant may behave differently from the wild type. Keeping the catalytic core as unchanged as possible is especially important for Rubisco.",
           "how": "The mutant and wild-type models were aligned in ChimeraX. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
+          "hero_label": "Aligned wild-type and mutant models"
         },
         "interface": {
           "title": "Holoenzyme Interface Preservation",
