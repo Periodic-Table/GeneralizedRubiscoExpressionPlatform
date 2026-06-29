@@ -33,41 +33,62 @@
           "short_title": "Stability",
           "graphic_type": "deltag",
           "hero_label": "ΔΔG changes between the wild-type and mutant rbcLs"
+          "what": "ΔΔG describes the predicted change in protein stability caused by the N-terminal substitution. It compares the mutant RbcL with the original plant protein.",
+          "why": "If the mutation makes RbcL much less stable, the protein may be harder to fold correctly or keep stable once it is produced in E. coli.",
+          "how": "Predicted structures for the original and mutant RbcL proteins were evaluated with FoldX to estimate the stability change caused by the substitution.",
         },
         "core_fold": {
           "title": "Core Structural Preservation",
           "short_title": "Core fold",
           "graphic_type": "rmsd",
           "hero_label": "Aligned wild-type and mutant models"
+          "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. It is a way to see how similar the two proteins are overall.",
+          "why": "If the structure changes a lot, the mutant may behave differently from the wild type. Keeping the catalytic core as unchanged as possible is especially important for Rubisco.",
+          "how": "The mutant and wild-type models were aligned in ChimeraX. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
         },
         "interface": {
           "title": "Holoenzyme Interface Preservation",
           "short_title": "Interfaces",
           "graphic_type": "interface",
+          "what": "This metric looks at the protein-protein interface areas between RbcL and RbcS in the original and mutant Rubisco holoenzymes.",
+          "why": "The point of the engineered N-terminus is to make assembly easier, so it is important that the mutation does not badly disrupt the interfaces needed to form the L8S8 holoenzyme.",
+          "how": "Holoenzyme models were built in PyMOL by placing the mutant RbcL into the original holoenzyme and removing the original RbcL. PISA was then used to compare interface areas across the protein-protein contacts.",
           "hero_label": "Mutant holoenzyme model"
         },
         "nterm_similarity": {
           "title": "N-terminal Structural Similarity to a Successful Construct",
           "short_title": "N-term shape",
           "graphic_type": "alignment",
+          "what": "This metric compares the engineered N-terminus of the rice construct to a successful N-terminal mutant reported in the literature.",
+          "why": "Even with the same amino acid sequence, the N-terminus can fold slightly differently in different plant backbones. If the shape is similar to a known successful construct, the chaperones are more likely to recognize it in the same way.",
+          "how": "The N-terminal residues from the rice mutant and the successful spinach construct were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded.",
           "hero_label": "Aligned Wild-type and mutant N-termini"
         },
         "nterm_surface": {
           "title": "N-terminal Surface Area Similarity to a Successful Construct",
           "short_title": "N-term surface",
           "graphic_type": "surface",
+          "what": "This metric checks how similar the N-terminal surface area is between the rice mutant and the successful spinach mutant.",
+          "why": "Surface area gives an extra way to compare the part of the protein that the chaperones will actually see and bind to during assembly.",
+          "how": "The N-terminal regions were isolated in PyMOL and their surface areas were measured and compared.",
           "hero_label": "Wild-type and mutant N-termini surfaces"
         },
         "mutation_burden": {
           "title": "Conservation-Weighted Mutation Burden",
           "short_title": "Mutation burden",
           "graphic_type": "mutation",
+          "what": "This metric estimates how disruptive the N-terminal substitutions are across the sequence overall. It combines how conserved each residue is with how disruptive the actual substitution is.",
+          "why": "Large sequence changes can be risky. This metric helps compare how harsh the N-terminal replacement is from one plant to another and gives a quick sense of how unusual the engineered sequence is.",
+          "how": "A multiple sequence alignment is used to measure conservation at each position, and BLOSUM62 is used to score the substitution itself. The two values are then combined across the 76-residue replacement.",
           "hero_label": "Residue conservation map"
         },
         "codon_adaptation": {
           "title": "Codon Adaptation Score",
           "short_title": "Codon use",
           "graphic_type": "codon",
+          "what": "This metric measures the codon adaptation index, or CAI, for the engineered RbcL gene. It asks how closely the sequence matches the codon usage that E. coli prefers.",
+          "why": "Even a good protein design still has to be expressed efficiently. If the host cell has an easier time reading the gene, it should be more likely to make enough protein for testing.",
+          "how": "The modified RbcL sequence was reverse translated and codon-optimized for E. coli before being passed through a CAI calculator.",
           "hero_label": "E. coli under a microscope"
         }
       }
