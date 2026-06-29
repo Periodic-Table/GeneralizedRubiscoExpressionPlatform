@@ -50,7 +50,7 @@ function loadMeasureData() {
   el.drylabTitle.textContent = app.dryLab.headline;
   el.drylabSubtitle.textContent = app.dryLab.subtitle;
   el.methodTitle.textContent = app.dryLab.methodology_title;
-  el.methodCopy.textContent = app.dryLab.methodology;
+  // el.methodCopy.textContent = app.dryLab.methodology;
 
   el.speciesSelect.innerHTML = '';
   for (const [key, species] of Object.entries(data.species)) {
