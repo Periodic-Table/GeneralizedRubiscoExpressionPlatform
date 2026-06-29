@@ -109,7 +109,7 @@ function renderHeroSlot(metric, template) {
       </div>
     `;
   }
-  return `<div class="hero-slot">${escapeHtml(template.hero_label || 'Hero image slot')}</div>`;
+  // return `<div class="hero-slot">${escapeHtml(template.hero_label || 'Hero image slot')}</div>`;
 }
 
 function svgWrap(inner, viewBox = '0 0 640 240') {
@@ -132,18 +132,18 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
       </div>
 
       <div class="metric-layout">
-        <div class="metric-panel">
-          <div class="metric-label">What is being measured?</div>
-          <p>${escapeHtml(metric.what)}</p>
-
           <div class="metric-copy">
             <div>
+              <h4>What is being measured?</h4>
+              <p>${escapeHtml(template.what)}</p>
+            </div>
+            <div>
               <h4>Why does it matter?</h4>
-              <p>${escapeHtml(metric.why)}</p>
+              <p>${escapeHtml(template.why)}</p>
             </div>
             <div>
               <h4>How was it calculated?</h4>
-              <p>${escapeHtml(metric.how)}</p>
+              <p>${escapeHtml(template.how)}</p>
             </div>
             <div>
               <h4>Interpretation</h4>
@@ -158,7 +158,6 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
               <div class="detail-item"><strong>Raw result:</strong> ${escapeHtml(metric.display_result || 'Pending')}</div>
             </div>
           </details>
-        </div>
 
         <div class="metric-panel">
           <!-- <div class="metric-label">Graphic</div> -->
