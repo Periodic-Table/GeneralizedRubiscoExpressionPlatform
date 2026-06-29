@@ -130,8 +130,8 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
         </div>
         <div class="metric-badge">${resultBadge(metric)}</div>
       </div>
-    <div class="metric-panel">
-      <div class="metric-layout">
+      <div class="metric-panel">
+        <div class="metric-layout">
           <div class="metric-copy">
             <div>
               <h4>What is being measured?</h4>
@@ -151,13 +151,13 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="metric-panel">
-          <!-- <div class="metric-label">Graphic</div> -->
-          <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
-          <!-- <div class="metric-graphic" ></div> -->
-          <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
-        </div>
+      <div class="metric-panel">
+        <!-- <div class="metric-label">Graphic</div> -->
+        <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
+        <!-- <div class="metric-graphic" ></div> -->
+        <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
       </div>
     </article>
   `;
