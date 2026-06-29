@@ -130,7 +130,7 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
         </div>
         <div class="metric-badge">${resultBadge(metric)}</div>
       </div>
-
+    <div class="metric-panel">
       <div class="metric-layout">
           <div class="metric-copy">
             <div>
@@ -150,14 +150,7 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
               <p>${escapeHtml(metric.interpretation)}</p>
             </div>
           </div>
-
-          <details class="metric-details">
-            <summary>More details</summary>
-            <div class="detail-grid">
-              <div class="detail-item"><strong>Technical note:</strong> ${escapeHtml(metric.technical_details || 'No technical note supplied yet.')}</div>
-              <div class="detail-item"><strong>Raw result:</strong> ${escapeHtml(metric.display_result || 'Pending')}</div>
-            </div>
-          </details>
+        </div>
 
         <div class="metric-panel">
           <!-- <div class="metric-label">Graphic</div> -->
