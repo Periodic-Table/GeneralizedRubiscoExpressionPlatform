@@ -44,13 +44,13 @@ function loadMeasureData() {
   el.sequenceHeadline.textContent = app.sequence.headline;
   el.sequenceSubtitle.textContent = app.sequence.subtitle;
   el.sequenceExamples.textContent = `Examples: ${app.sequence.examples.join(', ')}.`;
-  el.sequenceFooter.textContent = app.sequence.footer;
+  // el.sequenceFooter.textContent = app.sequence.footer;
 
   el.drylabEyebrow.textContent = app.dryLab.eyebrow;
   el.drylabTitle.textContent = app.dryLab.headline;
   el.drylabSubtitle.textContent = app.dryLab.subtitle;
   el.methodTitle.textContent = app.dryLab.methodology_title;
-  // el.methodCopy.textContent = app.dryLab.methodology;
+  el.methodCopy.textContent = app.dryLab.methodology;
 
   el.speciesSelect.innerHTML = '';
   for (const [key, species] of Object.entries(data.species)) {
