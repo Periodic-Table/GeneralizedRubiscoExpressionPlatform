@@ -151,13 +151,10 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="metric-panel">
-        <!-- <div class="metric-label">Graphic</div> -->
-        <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
-        <!-- <div class="metric-graphic" ></div> -->
-        <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
+        <div class="metric-panel">
+            <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
+            <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
+        </div>
       </div>
     </article>
   `;
