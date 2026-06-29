@@ -162,7 +162,8 @@ function buildMetricSlide(metricKey, template, metric, index, total) {
         <div class="metric-panel">
           <!-- <div class="metric-label">Graphic</div> -->
           <div class="hero-slot">${renderHeroSlot(metric, template)}</div>
-          <!-- <div class="metric-graphic" >${renderGraphic(metricKey, template, metric)}</div> -->
+          <!-- <div class="metric-graphic" ></div> -->
+          // ${renderGraphic(metricKey, template, metric)}
           <div class="metric-caption" align="center">${escapeHtml(template.hero_label || '')}</div>
         </div>
       </div>
