@@ -645,7 +645,7 @@ textarea:focus {
   line-height: 1.5;
 }
 
-.hero-slot img {
+.hero-slot img, .intro img {
   width: 100%;
   height: 100%;
   display: block;
