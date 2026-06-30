@@ -236,6 +236,20 @@
       align-items: stretch;
       margin-bottom: 18px;
     }
+    .overview-grid{
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .intro-grid{
+      display: grid;
+      grid-template-columns: 2.9fr 1.1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
     .overall-card, .method-card, .carousel-card {
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -243,7 +257,7 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
       overflow: hidden;
     }
-    .intro .inner, .overall-card .inner, .method-card .inner, .carousel-card .inner { padding: 18px; }
+    .intro .inner, .overall-card .inner, .method-card .inner, .carousel-card .inner, intro-grid .inner { padding: 18px; }
     .over-title {
       color: var(--muted);
       text-transform: uppercase;
@@ -503,10 +517,10 @@
   <div class="wrap">
     <section class="intro">
         <div style="padding:10px">
-          <h1 id="sequenceHeadline">Welcome to the HARVEST dry lab platform</h1>
+          <h1>Welcome to the HARVEST dry lab platform</h1>
         </div>
         <div class="inner">
-          <div class="overview-grid">
+          <div class="intro-grid">
             <div class="overall-card">
               <div class="inner">
                 <p class="note">
