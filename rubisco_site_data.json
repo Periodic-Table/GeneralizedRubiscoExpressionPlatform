@@ -105,38 +105,38 @@
         "stability": {
           "display_result": "-2.51",
           "interpretation": "The ΔΔG value is slightly higher for this plant than normal, leading to a slight decrease in its overall score.",
-          "hero_image_path": "/images/GreenPeaMetric1.png"
+          "hero_image_path": "/images/PeaMetric1.png"
         },
         "core_fold": {
           "display_result": "RMSD: 0.517 Å",
           "interpretation": "The RMSD was moderately high at 0.517 Å, showing that the main core structure deviated somewhat from the wild type. This is part of the reason for the lower score, as the catalytic machinery of rbcL may not be as well-preserved following the N-terminal substitution and therefore less representative of the actual catalytic properties of pea Rubisco.",
-          "hero_image_path": "/images/GreenPeaMetric2.png"
+          "hero_image_path": "/images/PeaMetric2.png"
         },
         "interface": {
           "display_result": "Currently uncertain",
           "interpretation": "For a currently unknown reason, PISA predicted the complete disappearance of several interfaces within the mutant holoenzyme. The cause and validity of this is still being investigated and an average score has been selected in the meantime.",
-          "hero_image_path": "/images/GreenPeaMetric3.png"
+          "hero_image_path": "/images/PeaMetric3.png"
         },
         "nterm_similarity": {
           "display_result": "RMSD: 0.478 Å",
           "interpretation": "The N-terminus of the mutant green pea rbcL fairly well-aligned with that of the successful Flaveria rbcL. This close alignment indicates that the pea N-terminus is also likely to successfully bind to the general chaperone set.",
-          "hero_image_path": "/images/GreenPeaMetric4.png"
+          "hero_image_path": "/images/PeaMetric4.png"
         },
         "nterm_surface": {
           "display_result": "+0.79% difference",
           "interpretation": "The green pea N-terminal surface area is essentially identical to that of Flaveria, again indicating that it is likely to bind well to the chaperones.",
           "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
-          "hero_image_path": "/images/GreenPeaMetric5.png"
+          "hero_image_path": "/images/PeaMetric5.png"
         },
         "mutation_burden": {
           "display_result": "543",
           "interpretation": "A mutation burden of 543 is within the acceptable range, as other plant Rubisco proteins were successfully assembled in vitro with similar mutational burdens.",
-          "hero_image_path": "/images/GreenPeaMetric6.png"
+          "hero_image_path": "/images/PeaMetric6.png"
         },
         "codon_adaptation": {
           "display_result": "CAI: 1.00",
           "interpretation": "This sequence is well-optimized for E. coli with a CAI of 1.00. This is similar to that of other Rubisco proteins which were successfully produced in E. coli.",
-          "hero_image_path": "/images/GreenPeaMetric7.png"
+          "hero_image_path": "/images/PeaMetric7.png"
         }
       }
     },
