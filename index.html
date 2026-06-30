@@ -37,6 +37,16 @@
       margin: 0 auto;
       padding: 32px 18px 48px;
     }
+    .intro {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
     .hero {
       display: grid;
       gap: 14px;
@@ -81,12 +91,13 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .card .head { padding: 18px 18px 0; }
-    .card h2 { margin-bottom: 8px; font-size: 1.2rem; }
+    .card .head { padding: 18px 18px 18px; }
+    .card h2 { margin-bottom: 30px; margin-top: 10px; font-size: 2rem; }
     .card p.note {
       color: var(--muted);
       line-height: 1.5;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      margin-top: 10px;
     }
     .body { padding: 18px; }
     label {
@@ -484,10 +495,33 @@
 </head>
 <body>
   <div class="wrap">
+    <section class="card">
+        <div>
+          <h1 id="sequenceHeadline">Welcome to the HARVEST dry lab platform</h1>
+        </div>
+        <div class="overview-grid">
+          <div class="overall-card">
+            <p class="note">
+              HARVEST is a High-throughput Assay for Rubisco Variants via E. coli Screening and Testing. HARVEST was developed on the premise that advancing the frontier of land plant Rubisco research relies on the availability of a much higher throughput expression platform for wild-type and mutant Rubisco proteins. 
+            </p>
+            <p class="note">
+              Research on land plants, particularly when it comes to Rubisco, is notoriously slow. This is because, until now, the chassis for producing Rubisco proteins has necessarily been plants. HARVEST seeks to change that by developing a generalized Rubisco expression platform using E. coli. This page contains the beginnings of this research, a series of dry lab tests which seek to confirm the viability of the platform ahead of in vitro testing. 
+            </p>
+          </div>
+          <div class="overall-card">
+            <div class="logo">
+              <img src="/images/logo.png"></img>
+            </div>
+          </div>
+        </div>
+        <div class="overview-grid">
+          <p>Click for more scientific details</p>
+        </div>
+    </section>
 
     <section class="card drylab-shell" id="drylabSection">
       <div class="head">
-        <div class="eyebrow" id="drylabEyebrow">Dry-lab compatibility predictor</div>
+        <div class="eyebrow" id="drylabEyebrow">Compatibility predictor</div>
         <h2 id="drylabTitle">See how different Rubisco proteins score in their ability to be folded by a generalized platform</h2>
         <p class="note" id="drylabSubtitle"></p>
       </div>
