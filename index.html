@@ -109,6 +109,7 @@
       color: var(--text);
       outline: none;
       font-size: 1rem;
+      font-family: var(--sans);
     }
     input[type="text"]::placeholder { color: #6c789f; }
     input[type="text"]:focus, select:focus {
@@ -206,7 +207,7 @@
     .drylab-shell { margin-top: 18px; }
     .species-row {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
+      grid-template-columns: 250px minmax(0, 1fr);
       gap: 12px;
       align-items: end;
       margin-bottom: 16px;
@@ -296,6 +297,7 @@
       border-radius: 999px;
       background: rgba(255,255,255,0.08);
       overflow: hidden;
+      margin-top: 5px;
     }
     .legend-bar > span {
       display: block;
@@ -339,9 +341,10 @@
     }
     .metric-top {
       display: flex;
-      justify-content: space-between;
-      align-items: start;
+      align-items: center;
       gap: 12px;
+      height: auto;
+      justify-content: space-between;
     }
     .metric-top h3 { font-size: 1.75rem; line-height: 1.2; }
     .metric-badge {
@@ -357,7 +360,7 @@
     .metric-layout {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      gap: 14px;
+      gap: 50px;
       align-items: start;
     }
     .metric-panel {
@@ -456,6 +459,7 @@
       color: var(--muted);
       font-size: 0.92rem;
       line-height: 1.5;
+      padding: 16px;
     }
     .section-label {
       margin-bottom: 8px;
@@ -484,7 +488,7 @@
     <section class="card drylab-shell" id="drylabSection">
       <div class="head">
         <div class="eyebrow" id="drylabEyebrow">Dry-lab compatibility predictor</div>
-        <h2 id="drylabTitle">See how different proteins score in their ability to be folded</h2>
+        <h2 id="drylabTitle">See how different Rubisco proteins score in their ability to be folded by a generalized platform</h2>
         <p class="note" id="drylabSubtitle"></p>
       </div>
       <div class="body">
@@ -521,9 +525,9 @@
 
           <div class="method-card">
             <div class="inner">
-              <div class="over-title" id="methodTitle">How this section works</div>
+              <div class="over-title" id="methodTitle">How to use</div>
               <p class="method-copy" id="methodCopy"></p>
-              <div>
+              <div style="margin-top:10px">
                 <summary>Score legend</summary>
                 <div class="score-legend" id="scoreLegend"></div>
               </div>
@@ -536,7 +540,7 @@
             <div class="carousel-header">
               <div>
                 <div class="section-label" id="carouselKicker">Metric 1 of 7</div>
-                <h3 id="metricTitle">Metric title</h3>
+                <h3 id="metricTitle" hidden>Metric title</h3>
               </div>
               <div class="carousel-nav">
                 <button class="icon-btn" id="prevMetricBtn" type="button">←</button>
