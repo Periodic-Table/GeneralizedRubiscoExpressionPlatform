@@ -14,7 +14,7 @@
     },
     "dryLab": {
       "eyebrow": "Dry-lab compatibility predictor",
-      "headline": "See how different proteins score in their ability to be assembled by a generalized expression platform<",
+      "headline": "See how different proteins score in their ability to be assembled by a generalized expression platform",
       "subtitle": "For each plant in this directory, we have calculated a score based on seven key dry lab metrics. These metrics include factors such as stability, mutational burden, and, most important, similarity to the experimentally successful Rubisco mutants tested by Cai et al. (spinach, Flaveria, and tobacco). This score represents the likelihood that a given plant’s Rubisco protein will be assembled correctly in E. coli. The hope is that these scores can guide the selection of plants for in vitro tests and will be updated as further wet lab testing occurs.",
       "methodology_title": "How this section works",
       "methodology": "Select a plant from the dropdown to view the overall compatibility score and further information on the seven metrics.",
