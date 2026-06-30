@@ -42,8 +42,8 @@
           "short_title": "Core fold",
           "graphic_type": "rmsd",
           "what": "This metric measures the root mean square deviation between the wild-type and mutant RbcL structures. A low RMSD indicates that the proteins are structurally similar.",
-          "why": "If the mutant structure is significantly different from the wild type, it may behave differently, particularly in its catalytic behaviour. Keeping the catalytic core as unchanged as possible is especially important for Rubisco, as its catalytic parameters are most frequently studied.",
-          "how": "The mutant and wild-type models were aligned in PyMol. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core.",
+          "why": "If the mutant structure is significantly different from the wild type, it may behave differently, particularly in its catalytic behaviour. It is therefore important that the mutant rbcL be structurally similar to the wild type.",
+          "how": "The mutant and wild-type models were aligned in PyMol. The output included both unpruned RMSD, which reflects the whole protein, and pruned RMSD, which focuses on the conserved core. The pruned RMSD was reported.",
           "hero_label": "Aligned wild-type (blue) and mutant (yellow) models"
         },
         "interface": {
@@ -62,7 +62,7 @@
           "what": "This metric compares the N-terminal structure of the mutant construct to a successful N-terminal mutant reported in the literature.",
           "why": "Even with the same amino acid sequence from Synechococcus, the N-terminus can fold slightly differently in different plant backbones. If the shape of the N-terminus is similar to a known successful construct (i.e. from spinach, Flaveria, or tobacco), the general chaperones are more likely to recognize and bind to it in the same way.",
           "how": "The first 76 N-terminal residues from the mutant and the successful spinach, Flaveria, and tobacco constructs were isolated and aligned in PyMOL. The RMSD from the alignment was then recorded for each and the lowest RMSD was chosen.",
-          "hero_label": "Aligned wild-type (green) and mutant (yellow) N-termini"
+          "hero_label": "Aligned wild-type (yellow) and mutant (green) N-termini"
         },
         "nterm_surface": {
           "title": "N-terminal Surface Area Similarity to a Successful Construct",
@@ -71,7 +71,7 @@
           "what": "This metric measures the percentage change in surface area between the mutant N-terminus and that of a successful construct reported in the literature.",
           "why": "Surface area gives an another way to compare the part of the protein that the chaperones will bind to during assembly. A drastic reduction in surface area as compared to successful constructs would mean that the chaperones have less N-terminal area to bind to, likely resulting in less successful assembly.",
           "how": "The N-terminal regions were isolated in PyMOL and their surface areas were measured and compared. Percentage difference in surface area was computed between the mutant and the successful N-termini and the highest positive value was chosen.",
-          "hero_label": "Wild-type (green) and mutant (yellow) N-termini surfaces superimposed"
+          "hero_label": "Wild-type (yellow) and mutant (green) N-termini surfaces superimposed"
         },
         "mutation_burden": {
           "title": "Conservation-Weighted Mutation Burden",
@@ -79,7 +79,7 @@
           "graphic_type": "mutation",
           "what": "This metric estimates how disruptive the N-terminal substitution is across the sequence overall. It combines the conservation of each residue with the disruptiveness of the mutation made.",
           "why": "Significant mutations to a sequence can be damaging to protein, especially if that mutation replaces a highly conserved residue across plant evolutionary history or makes a particularly disruptive residue change. This score quantifies the burden brought on by the 76-residue mutation, which is different between plants.",
-          "how": "A multiple sequence alignment created using ConSurf is used to measure conservation at each residue position, and the BLOSUM62 matrix is used to score the substitution itself. The two values are multipled and the score for each residue is summed across the 76-residue replacement. A lower score indicates a lower mutational burden.",
+          "how": "A multiple sequence alignment created using ConSurf was used to measure conservation at each residue position, and the BLOSUM62 matrix was used to score the substitution itself. The two values are multipled and the score for each residue is summed across the 76-residue replacement. A lower score indicates a lower mutational burden.",
           "hero_label": "Residue conservation map"
         },
         "codon_adaptation": {
@@ -108,8 +108,8 @@
           "hero_image_path": "/images/ArabidopsisMetric1.png"
         },
         "core_fold": {
-          "display_result": "Pruned RMSD: 0.756 Å",
-          "interpretation": "The pruned RMSD was quite high at 0.756 Å, showing that the main core structure deviated somewhat from the wild type. This is part of the reason for the lower score, as the catalytic machinery of rbcL may not be as well-preserved following the N-terminal substitution and therefore less representative of the actual catalytic properties of Arabidopsis Rubisco.",
+          "display_result": "RMSD: 0.756 Å",
+          "interpretation": "The RMSD was quite high at 0.756 Å, showing that the main core structure deviated somewhat from the wild type. This is part of the reason for the lower score, as the catalytic machinery of rbcL may not be as well-preserved following the N-terminal substitution and therefore less representative of the actual catalytic properties of Arabidopsis Rubisco.",
           "hero_image_path": "/images/ArabidopsisMetric2.png"
         },
         "interface": {
@@ -149,43 +149,37 @@
       "metrics": {
         "stability": {
           "display_result": "-2.49",
-          "interpretation": "Since Flaveria assembled successfully in vitro, a drop in stability as low as -2.49 is acceptable.",
+          "interpretation": "Since Flaveria assembled successfully in vitro, a drop in stability as low as -2.49 can be considered acceptable.",
           "hero_image_path": "/images/FlaveriaMetric1.png"
         },
         "core_fold": {
-          "display_result": "Pruned RMSD: 0.475 Å",
-          "interpretation": "The pruned RMSD was only 0.389 Å, showing that the main core structure stayed very close to the wild type. This is important because the catalytic machinery sits in this conserved region.",
-          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "display_result": "RMSD: 0.475 Å",
+          "interpretation": "The RMSD was only 0.389 Å, showing that the main core structure stayed very close to the wild type. This is important because the catalytic machinery sits in this conserved region.",
           "hero_image_path": "/images/FlaveriaMetric2.png"
         },
         "interface": {
           "display_result": "N/A",
           "interpretation": "A holoenzyme model for Flaveria bidentis has not been published, so this metric cannot be computed",
-          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
           "hero_image_path": "/images/FlaveriaMetric3.png"
         },
         "nterm_similarity": {
           "display_result": "RMSD: 0 Å",
           "interpretation": "The metric involves comparing to the successful Flaveria N-terminus, but since this is Flaveria, this is not meaningful. A base score of 1 was given.",
-          "technical_details": "PyMOL alignment of residues 1-76 against the successful Flaveria construct.",
           "hero_image_path": "/images/FlaveriaMetric4.png"
         },
         "nterm_surface": {
           "display_result": "0% difference",
           "interpretation": "As before, a comparison cannot be made between Flaveria and itself. A base score of 1 was given.",
-          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
           "hero_image_path": "/images/FlaveriaMetric5.png"
         },
         "mutation_burden": {
           "display_result": "550",
           "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
-          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
           "hero_image_path": "/images/FlaveriaMetric6.png"
         },
         "codon_adaptation": {
           "display_result": "CAI: 0.9",
           "interpretation": "This sequence was surprisingly well-optimized for E. coli with a CAI of 0.9. This may have been part of the reason it was selected for experimental study.",
-          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
           "hero_image_path": "/images/FlaveriaMetric7.png"
         }
       }
@@ -198,39 +192,33 @@
       "overall_note": "",
       "metrics": {
         "stability": {
-          "display_result": "Positive ΔΔG",
-          "interpretation": "Coming soon.",
-          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
+          "display_result": "-2.49",
+          "interpretation": "Since tobacco assembled successfully in vitro, a drop in stability as low as -2.49 can be considered acceptable.",
           "hero_image_path": "/images/TobaccoMetric1.png"
         },
         "core_fold": {
-          "display_result": "Pruned RMSD: 0.475 Å",
-          "interpretation": "The pruned RMSD was only 0.475 Å, showing that the main core structure stayed very close to the wild type. This is important because the catalytic machinery sits in this conserved region.",
-          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "display_result": "RMSD: 0.475 Å",
+          "interpretation": "The RMSD was only 0.475 Å, showing that the main core structure stayed very close to the wild type. This is important because the catalytic machinery sits in this conserved region.",
           "hero_image_path": "/images/TobaccoMetric2.png"
         },
         "interface": {
           "display_result": "Largest decrease: 5.17%",
           "interpretation": "The largest decrease in interface area was 5.17% between substructures A and E. This is a fairly small change, which indicates why it was successful in when tested in the lab.",
-          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
           "hero_image_path": "/images/TobaccoMetric3.png"
         },
         "nterm_similarity": {
           "display_result": "RMSD: 0 Å",
           "interpretation": "The metric involves comparing to the successful tobacco N-terminus, but since this is tobacco, this is not meaningful. A base score of 1 was given.",
-          "technical_details": "PyMOL alignment of residues 1-76 against the successful tobacco construct.",
           "hero_image_path": "/images/TobaccoMetric4.png"
         },
         "nterm_surface": {
           "display_result": "0% difference",
           "interpretation": "As before, a comparison cannot be made between tobacco and itself. A base score of 1 was given.",
-          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
           "hero_image_path": "/images/TobaccoMetric5.png"
         },
         "mutation_burden": {
           "display_result": "542",
           "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
-          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
           "hero_image_path": "/images/TobaccoMetric6.png"
         },
         "codon_adaptation": {
@@ -249,45 +237,38 @@
       "overall_note": "",
       "metrics": {
         "stability": {
-          "display_result": "Positive ΔΔG",
-          "interpretation": "Coming soon.",
-          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
+          "display_result": "-2.48",
+          "interpretation": "Since spinach assembled successfully in vitro, a drop in stability as low as -2.48 can be considered acceptable.",
           "hero_image_path": "/images/SpinachMetric1.png"
         },
         "core_fold": {
-          "display_result": "Pruned RMSD: 0.413 Å",
-          "interpretation": "The pruned RMSD was only 0.413 Å, showing that the main core structure stayed very close to the wild type. That is important because the catalytic machinery sits in this conserved region.",
-          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "display_result": "RMSD: 0.413 Å",
+          "interpretation": "The RMSD was only 0.413 Å, showing that the main core structure stayed very close to the wild type. That is important because the catalytic machinery sits in this conserved region.",
           "hero_image_path": "/images/SpinachMetric2.png"
         },
         "interface": {
           "display_result": "Largest decrease: 15.76%",
           "interpretation": "The largest decrease in interface area was 15.76% between substructures A and E. This is a comparatively large change, but since this was successful experimentally, it demonstrates that interface area changes as high as 15% are acceptable.",
-          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
           "hero_image_path": "/images/SpinachMetric3.png"
         },
         "nterm_similarity": {
           "display_result": "RMSD: 0 Å",
           "interpretation": "The metric involves comparing to the successful spinach N-terminus, but since this is spinach, this is not meaningful. A base score of 1 was given.",
-          "technical_details": "PyMOL alignment of residues 1-76 against the successful spinach construct.",
           "hero_image_path": "/images/SpinachMetric4.png"
         },
         "nterm_surface": {
           "display_result": "0% difference",
           "interpretation": "As before, a comparison cannot be made between spinach and itself. A base score of 1 was given.",
-          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
           "hero_image_path": "/images/SpinachMetric5.png"
         },
         "mutation_burden": {
           "display_result": "542",
-          "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
-          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
+          "interpretation": "This metric is primarily useful when comparing other plants to successful constructs. The score, however, indicates that mutational burdens as high as 542 can still be created successfully, which is useful for this comparison.",
           "hero_image_path": "/images/SpinachMetric6.png"
         },
         "codon_adaptation": {
           "display_result": "CAI: 1.00",
-          "interpretation": "This sequence was surprisingly well-optimized for E. coli with a CAI of 1.00. This may have been part of the reason it was selected for experimental study.",
-          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
+          "interpretation": "This sequence was very well-optimized for E. coli with a CAI of 1.00. This may have been part of the reason it was selected for experimental study.",
           "hero_image_path": "/images/SpinachMetric7.png"
         }
       }
@@ -302,43 +283,36 @@
         "stability": {
           "display_result": "Positive ΔΔG",
           "interpretation": "The mutant rice RbcL has a positive ΔΔG, which suggests that the engineered protein is not obviously destabilized and may even be slightly more stable than the wild type. That is a good sign for folding in E. coli.",
-          "technical_details": "FoldX stability comparison on predicted wild-type and mutant structures.",
           "hero_image_path": "/images/RiceMetric1.png"
         },
         "core_fold": {
-          "display_result": "Pruned RMSD: 0.436 Å",
-          "interpretation": "The unpruned RMSD was 3.706 Å, which is high but expected because the N-terminus has been changed. The pruned RMSD was only 0.436 Å, showing that the main core structure stayed very close to the wild type. That is important because the catalytic machinery sits in this conserved region.",
-          "technical_details": "ChimeraX alignment with both pruned and unpruned RMSD values reported.",
+          "display_result": "RMSD: 0.436 Å",
+          "interpretation": "The RMSD was only 0.436 Å, showing that the main core structure stayed very close to the wild type. That is important because the catalytic machinery sits in this conserved region.",
           "hero_image_path": "/images/RiceMetric2.png"
         },
         "interface": {
           "display_result": "Largest decrease: 5.83%",
-          "interpretation": "The largest decrease in interface area was 5.83% between substructures A and D. That is a small change, so the mutation is unlikely to seriously interfere with holoenzyme assembly.",
-          "technical_details": "PyMOL model reconstruction followed by PISA interface comparison.",
+          "interpretation": "The largest decrease in interface area was by 5.83%. This is a small change, so the mutation is unlikely to seriously interfere with holoenzyme assembly.",
           "hero_image_path": "/images/RiceMetric3.png"
         },
         "nterm_similarity": {
           "display_result": "RMSD: 0.347 Å",
           "interpretation": "The rice and spinach N-termini align very closely, with an RMSD of 0.347 Å. That suggests the rice construct presents a similar recognition surface to the successful spinach example, which is a promising sign for assembly.",
-          "technical_details": "PyMOL alignment of residues 1-76 against the successful spinach construct.",
           "hero_image_path": "/images/RiceMetric4.png"
         },
         "nterm_surface": {
           "display_result": "<0.5% difference",
           "interpretation": "The rice mutant differs from the successful spinach mutant by less than 0.5% in surface area. That means the two N-termini expose almost the same amount of surface, so the chaperones should see a very similar target.",
-          "technical_details": "PyMOL surface-area comparison of the isolated N-terminal region.",
           "hero_image_path": "/images/RiceMetric5.png"
         },
         "mutation_burden": {
           "display_result": "503",
-          "interpretation": "This metric is primarily useful when comparing across species. More information will be added as more plants are added.",
-          "technical_details": "Conservation weighting from an RbcL MSA plus BLOSUM62 substitution penalties.",
+          "interpretation": "The mutational burden is signficantly lower than those of the successful constructs, as well as other plants in this directory, indicating it may be easier to synthesize.",
           "hero_image_path": "/images/RiceMetric6.png"
         },
         "codon_adaptation": {
           "display_result": "CAI: 0.708",
-          "interpretation": "A CAI of 0.708 is fairly high, which suggests that E. coli should be able to produce the engineered RbcL sequence reasonably well.",
-          "technical_details": "Reverse translation, codon optimization for E. coli, and CAI calculation.",
+          "interpretation": "A CAI of 0.708 is lower than most plants in the directory, which suggests that E. coli may struggle somewhat in producing the mutant sequence relative to other plants.",
           "hero_image_path": "/images/RiceMetric7.png"
         }
       }
